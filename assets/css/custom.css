@@ -1,3 +1,5 @@
+body { outline: 6px solid red !important; }
+
 /* Sidebar color override (dark aqua) */
 #sidebar,
 #sidebar-wrapper,
