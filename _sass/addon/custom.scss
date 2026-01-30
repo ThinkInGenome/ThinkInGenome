@@ -1,0 +1,34 @@
+/* === Thinking in Genomes — Custom Theme Overrides === */
+
+/* Left sidebar: dark aqua */
+#sidebar,
+#sidebar-wrapper,
+aside#sidebar {
+  background-color: #0b3c49 !important;
+}
+
+/* Sidebar text & icons */
+#sidebar,
+#sidebar a,
+#sidebar span,
+#sidebar i {
+  color: #e6f6f9 !important;
+}
+
+/* Hover / active */
+#sidebar a:hover,
+#sidebar .nav-link.active {
+  color: #ffffff !important;
+}
+
+/* Bigger logo */
+#avatar {
+  width: 120px !important;
+  height: 120px !important;
+}
+
+#avatar img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: contain;
+}
