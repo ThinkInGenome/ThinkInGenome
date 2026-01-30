@@ -16,7 +16,7 @@ timezone:
 
 title: Thinking in Genomes # the main title
 
-tagline: From biological questions to genomic answers.# it will display as the subtitle
+tagline: From biological questions to genomic answers.
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
