@@ -1,0 +1,15 @@
+/* Dark color scheme overrides */
+
+@mixin styles {
+  --main-wrapper-bg: #020617;
+  --content-bg: #020617;
+
+  --sidebar-bg: #062a33;
+  --sidebar-muted-color: #9fd3df;
+  --sidebar-active-color: #ffffff;
+
+  --panel-bg: #020617;
+
+  --link-color: #7dd3fc;
+  --link-hover-color: #bae6fd;
+}
