@@ -1,0 +1,34 @@
+---
+---
+
+@import "jekyll-theme-chirpy";
+
+/* === Thinking in Genomes: color overrides === */
+
+/* Left sidebar */
+#sidebar,
+#sidebar-wrapper,
+aside#sidebar {
+  background-color: #0b3c49 !important; /* dark aqua */
+}
+
+/* Sidebar text/icons */
+#sidebar,
+#sidebar a,
+#sidebar span,
+#sidebar i {
+  color: #e6f6f9 !important;
+}
+
+#sidebar a:hover,
+#sidebar .nav-link.active {
+  color: #ffffff !important;
+}
+
+/* Right-side panel background (TOC / tags / etc.) */
+#panel-wrapper .panel,
+#panel-wrapper .panel-heading,
+#panel-wrapper .panel-body,
+#panel-wrapper section {
+  background-color: #eef6fb !important; /* light blue */
+}
