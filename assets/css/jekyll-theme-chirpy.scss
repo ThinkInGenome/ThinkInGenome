@@ -1,34 +1,23 @@
 ---
 ---
 
-@import "jekyll-theme-chirpy";
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
 
-/* === Thinking in Genomes: color overrides === */
+/* === Your color overrides below === */
 
-/* Left sidebar */
-#sidebar,
-#sidebar-wrapper,
-aside#sidebar {
-  background-color: #0b3c49 !important; /* dark aqua */
+/* Light mode colors */
+:root[data-mode="light"] {
+  --main-wrapper-bg: #ffffff;  /* white background */
+  --panel-bg: #eef6fb;         /* right panel light blue */
+  --sidebar-bg: #0b3c49;       /* left sidebar dark aqua */
 }
 
-/* Sidebar text/icons */
-#sidebar,
-#sidebar a,
-#sidebar span,
-#sidebar i {
-  color: #e6f6f9 !important;
-}
-
-#sidebar a:hover,
-#sidebar .nav-link.active {
-  color: #ffffff !important;
-}
-
-/* Right-side panel background (TOC / tags / etc.) */
-#panel-wrapper .panel,
-#panel-wrapper .panel-heading,
-#panel-wrapper .panel-body,
-#panel-wrapper section {
-  background-color: #eef6fb !important; /* light blue */
+/* Optional: keep dark mode reasonable too */
+:root[data-mode="dark"] {
+  --sidebar-bg: #062a33;
 }
