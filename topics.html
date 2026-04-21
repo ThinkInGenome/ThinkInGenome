@@ -12,16 +12,19 @@ permalink: /topics/
 
   <div class="entries-list">
     {% assign all_cats = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort %}
+    {% assign total = site.posts.size %}
     {% for cat in all_cats %}
       {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" %}
       <div id="{{ cat | slugify }}" style="margin-bottom: 3rem;">
         <div class="section-label" style="display:flex;justify-content:space-between;align-items:center;">
           <span>{{ cat | replace: '-', ' ' | capitalize }}</span>
-          <span>{{ cat_posts.size }} {{ cat_posts.size | pluralize: 'entry', 'entries' }}</span>
+          <span>{{ cat_posts.size }}</span>
         </div>
-        {% assign total = site.posts.size %}
         {% for post in cat_posts %}
-          {% assign global_idx = site.posts | map: 'url' | index: post.url %}
+          {% assign global_idx = 0 %}
+          {% for p in site.posts %}
+            {% if p.url == post.url %}{% assign global_idx = forloop.index0 %}{% endif %}
+          {% endfor %}
           {% assign num = total | minus: global_idx | prepend: '0' | slice: -2, 2 %}
           <a href="{{ site.baseurl }}{{ post.url }}">
             <div class="entry-row">
