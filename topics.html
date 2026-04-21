@@ -1,0 +1,40 @@
+---
+layout: default
+title: Topics
+permalink: /topics/
+---
+
+<div class="page-wrapper">
+  <div class="page-hero">
+    <div class="page-label">Browse by topic</div>
+    <h1>Topics</h1>
+  </div>
+
+  <div class="entries-list">
+    {% assign all_cats = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort %}
+    {% for cat in all_cats %}
+      {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" %}
+      <div id="{{ cat | slugify }}" style="margin-bottom: 3rem;">
+        <div class="section-label" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>{{ cat | replace: '-', ' ' | capitalize }}</span>
+          <span>{{ cat_posts.size }} {{ cat_posts.size | pluralize: 'entry', 'entries' }}</span>
+        </div>
+        {% assign total = site.posts.size %}
+        {% for post in cat_posts %}
+          {% assign global_idx = site.posts | map: 'url' | index: post.url %}
+          {% assign num = total | minus: global_idx | prepend: '0' | slice: -2, 2 %}
+          <a href="{{ site.baseurl }}{{ post.url }}">
+            <div class="entry-row">
+              <div class="entry-num">{{ num }}</div>
+              <div>
+                <div class="entry-row-meta">{{ post.date | date: "%B %-d, %Y" }}</div>
+                <div class="entry-row-title">{{ post.title }}</div>
+                <div class="entry-row-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</div>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
