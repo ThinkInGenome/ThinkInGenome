@@ -4,15 +4,11 @@ description: "A question-driven blog about genomics, evolution, and metagenomics
 url: "https://thinkingenome.github.io"
 baseurl: "/ThinkInGenome"
 
-# Author
 author:
   name: "Thinking in Genomes"
 
-# Social (optional — remove lines you don't need)
 github_username: ThinkInGenome
-# twitter_username: your_handle
 
-# Build
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -21,10 +17,8 @@ kramdown:
     block:
       line_numbers: false
 
-# Permalinks — keeps existing post URLs intact
 permalink: /posts/:title/
 
-# Pagination
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
@@ -33,7 +27,6 @@ plugins:
 paginate: 20
 paginate_path: "/page/:num/"
 
-# Exclude from build
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -41,11 +34,8 @@ exclude:
   - .github
   - node_modules
   - vendor
+  - tools
 
-# Collections
-collections_dir: .
-
-# Defaults — so existing posts don't need layout: post in every file
 defaults:
   - scope:
       path: ""
