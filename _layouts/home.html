@@ -1,30 +1,84 @@
---- layout: default --- {% assign all_posts = site.posts %} {% assign featured = all_posts.first %}
-Question-driven genomics
-From biological questions
-to genomic answers
-{{ site.tagline }}
+---
+layout: default
+---
 
-{% if featured %}
-Latest entry
-{{ featured.date | date: "%b %-d, %Y" }} {% for cat in featured.categories limit:2 %} {{ cat | replace: '-', ' ' }} {% endfor %} {% for tag in featured.tags limit:1 %} {{ tag | replace: '-', ' ' }} {% endfor %}
-{{ featured.title }}
-{{ featured.excerpt | strip_html | truncate: 220 }}
+{% assign all_posts = site.posts %}
+{% assign featured = all_posts.first %}
 
-Read entry →
-{% endif %} {% if all_posts.size > 1 %}
-All entries
-{% assign post_count = all_posts.size %} {% for post in all_posts %} {% assign display_num = post_count | minus: forloop.index0 %}
-{{ display_num | prepend: '0' | slice: -2, 2 }}
-{{ post.title }}
-{{ post.date | date: "%b %-d, %Y" }} {% if post.categories.size > 0 %} · {{ post.categories | join: ', ' | replace: '-', ' ' }}{% endif %}
-{% endfor %}
-{% endif %}
-{% assign all_categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort %} {% if all_categories.size > 0 %}
-Topics
-{% for cat in all_categories %} {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" %}
-{{ cat | replace: '-', ' ' | capitalize }} {{ cat_posts.size }}
-{% endfor %}
-{% endif %}
-On thinking before running
-A researcher’s blog on genomics, evolution, and metagenomics — written for people who want to understand the biology before they touch the pipeline.
-Read the about page →
+<div class="page-wrapper">
+  <div class="home-hero">
+    <div class="home-hero-kicker">Question-driven genomics</div>
+    <h1>From biological questions<br>to <em>genomic answers</em></h1>
+    <p class="home-hero-sub">{{ site.tagline }}</p>
+  </div>
+
+  <div class="home-body">
+    <div class="posts-col">
+
+      {% if featured %}
+      <div class="section-label">Latest entry</div>
+      <div class="post-featured">
+        <div class="post-meta">
+          <span class="post-date">{{ featured.date | date: "%b %-d, %Y" }}</span>
+          {% for cat in featured.categories limit:2 %}
+            <span class="post-tag tag-teal">{{ cat | replace: '-', ' ' }}</span>
+          {% endfor %}
+        </div>
+        <a href="{{ site.baseurl }}{{ featured.url }}">
+          <div class="post-featured-title">{{ featured.title }}</div>
+        </a>
+        <p class="post-featured-excerpt">{{ featured.excerpt | strip_html | truncate: 220 }}</p>
+        <a href="{{ site.baseurl }}{{ featured.url }}" class="read-link">Read entry &rarr;</a>
+      </div>
+      {% endif %}
+
+      {% if all_posts.size > 1 %}
+      <div class="section-label">All entries</div>
+      <div class="post-list">
+        {% assign post_count = all_posts.size %}
+        {% for post in all_posts %}
+          {% assign display_num = post_count | minus: forloop.index0 | prepend: '0' | slice: -2, 2 %}
+          <a href="{{ site.baseurl }}{{ post.url }}">
+            <div class="post-list-item">
+              <div class="post-list-num">{{ display_num }}</div>
+              <div class="post-list-content">
+                <div class="post-list-title">{{ post.title }}</div>
+                <div class="post-list-meta">
+                  {{ post.date | date: "%b %-d, %Y" }}
+                  {% if post.categories.size > 0 %}&nbsp;&middot;&nbsp;{{ post.categories | join: ', ' | replace: '-', ' ' }}{% endif %}
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
+
+    <aside class="sidebar">
+      {% assign all_categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort %}
+      {% if all_categories.size > 0 %}
+      <div class="sidebar-block">
+        <div class="sidebar-block-title">Topics</div>
+        {% for cat in all_categories %}
+          {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" %}
+          <div class="topic-row">
+            <a href="{{ site.baseurl }}/topics/#{{ cat | slugify }}">
+              <span>{{ cat | replace: '-', ' ' | capitalize }}</span>
+              <span class="topic-count">{{ cat_posts.size }}</span>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="sidebar-about">
+        <div class="sidebar-about-title">On thinking before running</div>
+        <div class="sidebar-about-text">A researcher&rsquo;s blog on genomics, evolution, and metagenomics &mdash; written for people who want to understand the biology before they touch the pipeline.</div>
+        <a href="{{ site.baseurl }}/about/" class="sidebar-about-link">Read the about page &rarr;</a>
+      </div>
+    </aside>
+
+  </div>
+</div>
