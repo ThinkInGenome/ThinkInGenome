@@ -1,46 +1,12 @@
 ---
 layout: default
 ---
-
-{% assign sorted = site.posts %}
-{% assign total = site.posts.size %}
-{% for p in sorted %}
-  {% if p.url == page.url %}{% assign curr_i = forloop.index0 %}{% endif %}
-{% endfor %}
-{% assign entry_display = total | minus: curr_i | prepend: '0' | slice: -2, 2 %}
-{% if curr_i > 0 %}{% assign newer = sorted[curr_i | minus: 1] %}{% endif %}
-{% assign older_i = curr_i | plus: 1 %}
-{% if older_i < sorted.size %}{% assign older = sorted[older_i] %}{% endif %}
-
 <div class="page-wrapper">
-  <div class="post-hero">
-    <div class="post-entry-label">Entry No. {{ entry_display }} &mdash; {{ page.categories | first | replace: '-', ' ' | capitalize }}</div>
-    <h1>{{ page.title }}</h1>
-    <div class="post-hero-meta">
-      <span>{{ page.date | date: "%B %-d, %Y" }}</span>
-      {% for cat in page.categories %}
-        <span class="post-tag tag-teal">{{ cat | replace: '-', ' ' }}</span>
-      {% endfor %}
-      {% for tag in page.tags %}
-        <span class="post-tag tag-coral">{{ tag | replace: '-', ' ' }}</span>
-      {% endfor %}
-    </div>
+  <div class="page-hero">
+    <div class="page-label">{{ page.label | default: page.title }}</div>
+    <h1>{{ page.heading | default: page.title }}</h1>
   </div>
-
-  <div class="post-content">{{ content }}</div>
-
-  <nav class="post-nav">
-    {% if older %}
-    <a href="{{ site.baseurl }}{{ older.url }}" class="post-nav-card">
-      <span class="post-nav-dir">&larr; Previous entry</span>
-      <span class="post-nav-title">{{ older.title }}</span>
-    </a>
-    {% else %}<div></div>{% endif %}
-    {% if newer %}
-    <a href="{{ site.baseurl }}{{ newer.url }}" class="post-nav-card next">
-      <span class="post-nav-dir">Next entry &rarr;</span>
-      <span class="post-nav-title">{{ newer.title }}</span>
-    </a>
-    {% endif %}
-  </nav>
+  <div class="page-content">
+    {{ content }}
+  </div>
 </div>
