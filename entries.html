@@ -1,0 +1,9 @@
+--- layout: default title: All Entries permalink: /entries/ ---
+Archive
+All entries
+{% assign total = site.posts.size %} {% for post in site.posts %} {% assign num = total | minus: forloop.index0 | prepend: '0' | slice: -2, 2 %}
+{{ num }}
+{{ post.date | date: "%B %-d, %Y" }} {% if post.categories.size > 0 %} · {{ post.categories | join: ' · ' | replace: '-', ' ' }}{% endif %}
+{{ post.title }}
+{{ post.excerpt | strip_html | truncate: 160 }}
+{% endfor %}
