@@ -1,9 +1,32 @@
---- layout: default title: All Entries permalink: /entries/ ---
-Archive
-All entries
-{% assign total = site.posts.size %} {% for post in site.posts %} {% assign num = total | minus: forloop.index0 | prepend: '0' | slice: -2, 2 %}
-{{ num }}
-{{ post.date | date: "%B %-d, %Y" }} {% if post.categories.size > 0 %} · {{ post.categories | join: ' · ' | replace: '-', ' ' }}{% endif %}
-{{ post.title }}
-{{ post.excerpt | strip_html | truncate: 160 }}
-{% endfor %}
+---
+layout: default
+title: All Entries
+permalink: /entries/
+---
+
+<div class="page-wrapper">
+  <div class="page-hero">
+    <div class="page-label">Archive</div>
+    <h1>All <em>entries</em></h1>
+  </div>
+
+  <div class="entries-list">
+    {% assign total = site.posts.size %}
+    {% for post in site.posts %}
+      {% assign num = total | minus: forloop.index0 | prepend: '0' | slice: -2, 2 %}
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <div class="entry-row">
+          <div class="entry-num">{{ num }}</div>
+          <div>
+            <div class="entry-row-meta">
+              {{ post.date | date: "%B %-d, %Y" }}
+              {% if post.categories.size > 0 %}&nbsp;&middot;&nbsp;{{ post.categories | join: ' &middot; ' | replace: '-', ' ' }}{% endif %}
+            </div>
+            <div class="entry-row-title">{{ post.title }}</div>
+            <div class="entry-row-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
