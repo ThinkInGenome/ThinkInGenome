@@ -1,0 +1,7 @@
+--- layout: default --- {% assign all_posts = site.posts | sort: 'date' %} {% assign post_index = 0 %} {% for p in all_posts %} {% if p.url == page.url %}{% assign post_index = forloop.index %}{% endif %} {% endfor %} {% assign entry_num = post_index | prepend: '0' | slice: -2, 2 %} {% assign total = site.posts.size %} {% assign rev_index = total | minus: post_index | plus: 1 %} {% assign entry_display = rev_index | prepend: '0' | slice: -2, 2 %} {% comment %}Prev/next for navigation{% endcomment %} {% assign sorted = site.posts %} {% for p in sorted %} {% if p.url == page.url %} {% assign curr_i = forloop.index0 %} {% endif %} {% endfor %} {% if curr_i > 0 %}{% assign newer = sorted[curr_i | minus: 1] %}{% endif %} {% assign older_i = curr_i | plus: 1 %} {% if older_i < sorted.size %}{% assign older = sorted[older_i] %}{% endif %}
+Entry No. {{ entry_display }} — {{ page.categories | first | replace: '-', ' ' | capitalize }}
+{{ page.title }}
+{{ page.date | date: "%B %-d, %Y" }} {% for cat in page.categories %} {{ cat | replace: '-', ' ' }} {% endfor %} {% for tag in page.tags %} {{ tag | replace: '-', ' ' }} {% endfor %} {{ content | number_of_words | divided_by: 200 | plus: 1 }} min read
+{{ content }}
+{% if older %} ← Previous entry {{ older.title }} {% else %}
+{% endif %} {% if newer %} Next entry → {{ newer.title }} {% endif %}
